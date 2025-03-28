@@ -22,7 +22,6 @@ sap.ui.define([
             open: function () {
                 const oView = this._oView;
 
-
                 // Create dialog lazily
                 if (!oView.byId("helloDialog")) {
 
