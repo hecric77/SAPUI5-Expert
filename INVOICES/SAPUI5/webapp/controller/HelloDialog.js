@@ -18,15 +18,9 @@ sap.ui.define([
             exit: function () {
                 delete this._oView;
             },
-            // Create dialog lazily
-            if (!oView.byId("helloDialog")) {
-
-                let oFragmentController = {
-                    onCloseDialog
 
             open: function () {
                 const oView = this._oView;
-
 
                 // Create dialog lazily
                 if (!oView.byId("helloDialog")) {
