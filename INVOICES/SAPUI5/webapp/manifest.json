@@ -95,16 +95,33 @@
       "routes": [
         {
           "name": "RouteApp",
-          "pattern": "RouteApp",
+          "pattern": "",
           "target": [
-            "TargetApp"
+            "TargetOverview"
+          ]
+        },
+        {
+          "name": "Details",
+          "pattern": "details/{invoicePath}",
+          "target": [
+            "TargetDetails"
           ]
         }
       ],
       "targets": {
-        "TargetView1": {
-          "id": "App",
-          "name": "App"
+        "TargetOverview": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "id": "Overview",
+          "name": "Overview"
+        },
+        "TargetDetails": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "id": "Details",
+          "name": "Details"
         }
       }
     },
