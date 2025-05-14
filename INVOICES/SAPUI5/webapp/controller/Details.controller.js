@@ -23,7 +23,7 @@ sap.ui.define([
 
             onInit: function(){
                 const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-                oRouter.getRoute("Details").attachPatternMatchRouteApped(this._onObjectMatch, this);
+                oRouter.getRoute("Details").attachPatternMatched(this._onObjectMatch, this);
             },
 
             onNavBack: function(){
