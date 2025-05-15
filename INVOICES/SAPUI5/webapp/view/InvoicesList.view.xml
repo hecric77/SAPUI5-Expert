@@ -1,33 +1,62 @@
 <mvc:View controllerName="logaligroup.SAPUI5.controller.InvoicesList" 
           xmlns="sap.m" 
           xmlns:mvc="sap.ui.core.mvc">
-    <List id="invoiceList"
-          headerText="{i18n>invoiceListTitle}" 
-          class="sapUiResponsiveMargin" 
-          width="auto" 
-          items="{ path : 'northwind>/Invoices', 
-                   sorter : { path : 'ShipperName',
-                              group : true } }">
+    <Panel accessibleRole="Region">
         <headerToolbar>
             <Toolbar>
                 <Title text="{i18n>invoiceListTitle}"/>
                 <ToolbarSpacer/>
-                <SearchField width="50%" search=".onFilterInvoices"/>
+                <SearchField width="50%" search=".onFilterInvoices" placeholder="{i18n>searchFieldPlaceHolder}"/>
             </Toolbar>
         </headerToolbar>
-        <items>
-            <ObjectListItem title="{northwind>Quantity} x {northwind>ProductName}"
-                            number="{ parts : [ {path : 'northwind>ExtendedPrice'},
-                                                {path : 'currency>/mxn'}],
-                                      type : 'sap.ui.model.type.Currency',
-                                      formatOptions : {
-                                          showMeasure : false
-                                      } }" 
-                            numberUnit="{currency>/mxn}"
-                            numberState="{= ${northwind>ExtendedPrice} > 9 ? 'Success' : 'Error'}"
-                            type="Navigation"
-                            press="navigateToDetails">
-            </ObjectListItem>
-        </items>
-    </List>
+        <Table id="invoiceList"
+            headerText="{i18n>invoiceListTitle}" 
+            class="sapUiResponsiveMargin" 
+            width="auto" 
+            items="{ path : 'northwind>/Invoices', 
+                    sorter : { path : 'ShipperName',
+                                group : true } }">
+            <columns>
+                <Column id="_IDQuantityColumn" hAlign="End" minScreenWidth="Small" demandPopin="true" width="5rem">
+                    <Text id="_IDQuantityColumnText" text="{i18n>columnQuantity}"/>
+                </Column>
+                <Column id="_IDNameColumn">
+                    <Text id="_IDNameColumnText" text="{i18n>columnName}"/>
+                </Column>
+                <Column id="_IDStatusColumn" minScreenWidth="Small" demandPopin="true">
+                    <Text id="_IDStatusColumnText" text="{i18n>columnStatus}"/>
+                </Column>
+                <Column id="_IDSupplierColumn" minScreenWidth="Tablet">
+                    <Text id="_IDSupplierColumnText" text="{i18n>columnSupplier}"/>
+                </Column>
+                <Column id="_IDPriceColumn" hAlign="End">
+                    <Text id="_IDPriceColumnText" text="{i18n>columnPrice}"/>
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem id="_IDColumnListItem" 
+                                type="Navigation"
+                                press="navigateToDetails">
+                    <cells>
+                        <ObjectNumber id="_IDQuantityObjectNumber" number="{northwind>Quantity}" emphasized="false"/>
+                        <ObjectIdentifier id="_IDProductObjectIdentifier" title="{northwind>ProductName}"/>
+                        <Text id="_IDStatusText" text="{ 
+                            path: '{northwind>Status}',
+                            formatter: '.formatter.invoiceStatus'
+                            }"/>
+                        <Text id="_IDSipperNameText" text="{northwind>ShipperName}"/>
+                        <ObjectNumber id="_IDCurrencyObjectNumber" 
+                                    number="{ parts : [ {path : 'northwind>ExtendedPrice'},
+                                                    {path : 'currency>/mxn'}],
+                                                type : 'sap.ui.model.type.Currency',
+                                                formatOptions : {
+                                                    showMeasure : false
+                                                } }" 
+                                    unit="{currency>/mxn}"
+                                    state="{= ${northwind>ExtendedPrice} > 50 ? 'Success' : 'Error'}"/>
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </Panel>
 </mvc:View>

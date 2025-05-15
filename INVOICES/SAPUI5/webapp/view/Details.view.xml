@@ -1,9 +1,12 @@
 <mvc:View controllerName="logaligroup.SAPUI5.controller.Details"
           xmlns="sap.m" 
           xmlns:mvc="sap.ui.core.mvc"
+          xmlns:logali="logaligroup.SAPUI5.control"
           displayBlock="true">
     <Page title="{i18n>detailsPageTitle}" showNavButton="true" navButtonPress=".onNavBack">
-        <ObjectHeader title="{northwind>Quantity} x {northwind>ProductName}">
+        <ObjectHeader title="{northwind>Quantity} x {northwind>ProductName}"
+                      responsive="true"
+                      fullScreenOptimized="true">
             <attributes>
                 <ObjectAttribute text="{northwind>ShipName}"/>
                 <ObjectAttribute text="{northwind>ShipAddress}"/>
@@ -15,5 +18,6 @@
                 <ObjectAttribute text="{northwind>CustomerName}"/>
             </attributes>
         </ObjectHeader>
+        <logali:ProductRating id="rating" class="sapUiSmallMarginBeginEnd" change=".onRatingChange" />
     </Page>
 </mvc:View>
